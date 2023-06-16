@@ -1,11 +1,14 @@
 .container{
-    min-width: 550px;
+    min-width: 600px;
     min-height: 450px;
+    max-width: 750px;
     display: flex;
     flex-direction: column;
     gap: 30px;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.12);
     padding-top: 5px;
+    height: fit-content;
+    margin: 0 auto;
 }
 
 .header{
@@ -13,6 +16,15 @@
     gap: 10px;
     overflow-x: auto;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.header::-webkit-scrollbar{
+    height: 7px;
+}
+
+.header::-webkit-scrollbar-thumb{
+    border-radius: 20px;
+    background-color: rgb(165, 165, 165);
 }
 
 .header .section {
@@ -60,6 +72,14 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    align-items: center;
+}
+
+.chips .new{
+    color: #239ce2;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
 }
 
 .chip{
