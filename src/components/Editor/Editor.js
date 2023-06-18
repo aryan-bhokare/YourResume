@@ -24,6 +24,7 @@ const Editor = (props) => {
       github: activeInformation?.detail?.github || "",
       phone: activeInformation?.detail?.phone || "",
       email: activeInformation?.detail?.email || "",
+      skills: activeInformation?.detail?.skills || [],
     })
 
     const handlePointUpdate = (value, index) => {
@@ -31,6 +32,18 @@ const Editor = (props) => {
       if (!Array.isArray(tempValues.points)) tempValues.points = [];
       tempValues.points[index] = value;
       setValues(tempValues);
+    };
+
+    const [skills, setSkills] = useState(values.skills || []);
+    const handleAddSkill = () => {
+      setSkills((prevSkills) => [...prevSkills, ""]);
+    };
+    const handleSkillChange = (value, index) => {
+      setSkills((prevSkills) => {
+        const updatedSkills = [...prevSkills];
+        updatedSkills[index] = value;
+        return updatedSkills;
+      });
     };
 
     const handleAddNew = () => {
@@ -161,14 +174,13 @@ const Editor = (props) => {
             }));
             break;
           }
-          case sections.summary: {
-            const tempDetail = values.summary;
-    
+          case sections.skills: {
+            const tempSkills = skills;
             props.setInformation((prev) => ({
               ...prev,
-              [sections.summary]: {
-                ...prev[sections.summary],
-                detail: tempDetail,
+              [sections.skills]: {
+                ...prev[sections.skills],
+                skills: tempSkills,
                 sectionTitle,
               },
             }));
@@ -462,16 +474,20 @@ const Editor = (props) => {
         </div>
       </div>
     );
-    const summaryBody = (
+    const skillsBody = (
       <div className={styles.detail}>
-        <InputControl
-          label="Summary"
-          value={values.summary}
-          placeholder="Enter your objective/summary"
-          onChange={(event) =>
-            setValues((prev) => ({ ...prev, summary: event.target.value }))
-          }
+        <div className={styles.column}>
+          <label>Enter Skills</label>
+          <button  onClick={handleAddSkill}>Add Skill</button>
+          {skills.map((skill, index) => (
+          <InputControl
+          key={index}
+          placeholder="Enter a skill"
+          value={skill}
+          onChange={(event) => handleSkillChange(event.target.value, index)}
         />
+        ))}
+        </div>
       </div>
     );
     const otherBody = (
@@ -499,8 +515,8 @@ const Editor = (props) => {
                 return educationBody;
             case sections.achievement:
                 return achievementsBody;
-            case sections.summary:
-                return summaryBody;
+            case sections.skills:
+                return skillsBody;
             case sections.other:
                 return otherBody;
             default:

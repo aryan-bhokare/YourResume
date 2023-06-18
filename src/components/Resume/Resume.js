@@ -17,9 +17,11 @@ const Resume = forwardRef((props,ref) => {
         achievement: information[sections.achievement],
         education: information[sections.education],
         basicInfo: information[sections.basicInfo],
-        summary: information[sections.summary],
+        skills: information[sections.skills],
         other: information[sections.other],
     }
+
+    // console.log('infom', info);
 
     const getFormattedDate = (value) =>{
         if(!value) return "";
@@ -214,19 +216,30 @@ const Resume = forwardRef((props,ref) => {
           </div>
         </div>
       ),
-      [sections.summary]: (
+      [sections.skills]: (
         <div
-          key={"summary"}
+          key={"skills"}
           draggable
-          onDragOver={()=>setTarget(info.summary?.id)}
-          onDragEnd={()=>setSource(info.summary?.id)}
+          onDragOver={()=>setTarget(info.skills?.id)}
+          onDragEnd={()=>setSource(info.skills?.id)}
           className={`${styles.section} ${
-            info.summary?.sectionTitle ? "" : styles.hidden
+            info.skills?.sectionTitle ? "" : styles.hidden
           }`}
         >
-          <div className={styles.sectionTitle}>{info.summary?.sectionTitle}</div>
+          <div className={styles.sectionTitle}>{info.skills?.sectionTitle}</div>
           <div className={styles.content}>
-            <p className={styles.overview}>{info.summary?.detail}</p>
+            {info.skills?.skills?.length > 0 ? (
+              <div className={styles.skills}>
+                {info.skills?.skills?.map((elem, index) => (
+                  <div className={styles.point} key={elem + index}>
+                    {elem}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <span />
+            )}
+            {/* <p className={styles.overview}>{info.skills?.detail}</p> */}
           </div>
         </div>
       ),
@@ -274,7 +287,7 @@ const Resume = forwardRef((props,ref) => {
 
     useEffect(()=>{
         setColumns([
-          [sections.project, sections.education, sections.summary],
+          [sections.project, sections.education, sections.skills],
           [sections.workExp, sections.achievement, sections.other],
         ])
     }, [])

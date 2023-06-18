@@ -14,7 +14,7 @@ const Body = () => {
       project: "Projects",
       education: "Education",
       achievement: "Achievements",
-      summary: "Summary",
+      skills: "Skills",
       other: "Other",
     };
     const resumeRef = useRef();
@@ -45,10 +45,10 @@ const Body = () => {
         sectionTitle: sections.achievement,
         points: [],
       },
-      [sections.summary]: {
-        id: sections.summary,
-        sectionTitle: sections.summary,
-        detail: "",
+      [sections.skills]: {
+        id: sections.skills,
+        sectionTitle: sections.skills,
+        detail: [],
       },
       [sections.other]: {
         id: sections.other,

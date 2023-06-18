@@ -148,3 +148,18 @@
   .hidden {
     display: none;
   }
+
+  .skills{
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 100px 100px 100px 100px;
+    gap: 10px;
+  }
+
+  .skills .point{
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    border: var(--color) 2px dotted;
+    border-radius: 5px;
+  }
