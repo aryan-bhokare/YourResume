@@ -2,7 +2,10 @@ import React, { useEffect, useState, useRef, forwardRef } from 'react';
 import styles from './Resume.module.css';
 import {Mail, Linkedin, GitHub, Paperclip, Calendar, MapPin, Phone} from 'react-feather';
 
+
 const Resume = forwardRef((props,ref) => {
+
+  
 
     const information = props.information;
     const sections = props.sections;
@@ -40,6 +43,7 @@ const Resume = forwardRef((props,ref) => {
             info.workExp?.sectionTitle ? "" : styles.hidden
           }`}
         >
+          
           <div className={styles.sectionTitle}>{info.workExp.sectionTitle}</div>
           <div className={styles.content}>
             {info.workExp?.details?.map((item) => (

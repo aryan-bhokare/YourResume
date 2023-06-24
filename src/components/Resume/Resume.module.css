@@ -160,6 +160,10 @@
     display: flex;
     justify-content: center;
     padding: 5px;
-    border: var(--color) 2px dotted;
+    text-align: center;
+    align-items: center;
+    /* color: white;
+    background-color: var(--color); */
+    border: var(--color) 2px solid;
     border-radius: 5px;
   }

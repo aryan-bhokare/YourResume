@@ -64,6 +64,12 @@
     flex-direction: column;
     gap: 10px;
 }
+.detail .column svg{
+    height: 15px;
+    width: 15px;
+    color: #fff;
+    cursor: pointer;
+}
 .detail .row > div{
     flex: 1;
 }

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Editor.module.css';
 import InputControl from '../InputControl/InputControl';
-import { X } from "react-feather";
+import { X, Trash2 } from "react-feather";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
-const Editor = (props) => {
+const Editor = (props) => { 
     const sections = props.sections;
     const information = props.information;
     // const setInformation = props.setInformation;
@@ -45,6 +46,13 @@ const Editor = (props) => {
         return updatedSkills;
       });
     };
+    const handleSkillDelete = () => {
+      setSkills((prevSkills) => {
+        const updatedSkills = [...prevSkills];
+        updatedSkills.pop();
+        return updatedSkills;
+      });
+    }
 
     const handleAddNew = () => {
       const details = activeInformation?.details;
@@ -478,6 +486,7 @@ const Editor = (props) => {
       <div className={styles.detail}>
         <div className={styles.column}>
           <label>Enter Skills</label>
+          <span>Try to add less than 12 skills</span>
           <button  onClick={handleAddSkill}>Add Skill</button>
           {skills.map((skill, index) => (
           <InputControl
@@ -487,6 +496,9 @@ const Editor = (props) => {
           onChange={(event) => handleSkillChange(event.target.value, index)}
         />
         ))}
+        { skills.length > 0 &&
+        <button onClick={handleSkillDelete}><Trash2/> Delete Last Skill</button>
+        }     
         </div>
       </div>
     );
